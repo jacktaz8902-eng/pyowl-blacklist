@@ -331,9 +331,9 @@
 
       set(size-8,8,1);
 
-      // 포맷 정보 영역 좌표(순서=비트 인덱스 0..14)
-      const c1=[]; for(let i=0;i<=5;i++)c1.push([8,i]); c1.push([8,7]);c1.push([8,8]);c1.push([7,8]); for(let i=9;i<15;i++)c1.push([14-i,8]);
-      const c2=[]; for(let i=0;i<8;i++)c2.push([size-1-i,8]); for(let i=8;i<15;i++)c2.push([8,size-15+i]);
+      // 포맷 정보 영역 좌표(순서=비트 인덱스 0..14) — [row, col]
+      const c1=[]; for(let i=0;i<=5;i++)c1.push([i,8]); c1.push([7,8]);c1.push([8,8]);c1.push([8,7]); for(let i=9;i<15;i++)c1.push([8,14-i]);
+      const c2=[]; for(let i=0;i<8;i++)c2.push([8,size-1-i]); for(let i=8;i<15;i++)c2.push([size-15+i,8]);
       c1.concat(c2).forEach(([r,c])=>{fn[r][c]=true;});
 
       // 데이터 배치 (지그재그)
