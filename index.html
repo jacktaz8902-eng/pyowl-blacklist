@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<title>BLACKLIST — 표정원 · 김연정 유출본</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#07090c" />
+<style>
+  :root{
+    --ink:#07090c;
+    --panel:#0d1116;
+    --panel-2:#11161d;
+    --line:#1c242e;
+    --line-2:#28323d;
+    --fg:#dfe6ee;
+    --fg-dim:#8794a1;
+    --fg-faint:#5b6774;
+    --red:#ff3b46;
+    --red-deep:#c9202b;
+    --amber:#e8b23a;
+    --green:#37d67a;
+    --cyan:#49c7d8;
+    --mono:"SFMono-Regular",ui-monospace,"Cascadia Mono","Consolas","DejaVu Sans Mono",monospace;
+    --kr:"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR","Pretendard",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;}
+  body{
+    min-height:100vh;
+    font-family:var(--kr);
+    color:var(--fg);
+    background:
+      radial-gradient(1200px 700px at 50% -10%, #10161d 0%, rgba(16,22,29,0) 60%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,.015) 0 1px, rgba(0,0,0,0) 1px 3px),
+      var(--ink);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:28px 16px calc(56px + env(safe-area-inset-bottom));
+    -webkit-font-smoothing:antialiased;
+    -webkit-text-size-adjust:100%;
+  }
+
+  .tape{
+    width:100%;max-width:430px;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;
+    color:#0a0c0f;
+    background:repeating-linear-gradient(-45deg,var(--amber) 0 22px,#0a0c0f 22px 24px,var(--amber) 24px 46px);
+    text-align:center;padding:7px 0;border-radius:4px;margin-bottom:14px;overflow:hidden;
+  }
+  .tape span{background:var(--amber);padding:2px 10px;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
+
+  .phone{
+    width:100%;max-width:430px;
+    background:linear-gradient(180deg,var(--panel) 0%, #090c10 100%);
+    border:1px solid var(--line-2);border-radius:34px;padding:12px;
+    box-shadow:0 0 0 1px rgba(0,0,0,.6),0 40px 80px -30px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.04);
+  }
+  .screen{background:var(--ink);border:1px solid var(--line);border-radius:24px;overflow:hidden;position:relative;}
+  .screen::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg, rgba(0,0,0,.16) 0 1px, rgba(0,0,0,0) 1px 3px);pointer-events:none;mix-blend-mode:multiply;opacity:.5;}
+
+  .status{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:11px;color:var(--fg-dim);padding:9px 18px 7px;}
+  .status .locked{color:var(--red);letter-spacing:.1em;}
+  .blink{animation:blink 1.1s steps(1) infinite;}
+  @keyframes blink{50%{opacity:.15;}}
+
+  .hdr{padding:16px 18px 18px;border-bottom:1px solid var(--line);background:radial-gradient(400px 120px at 20% 0%, rgba(255,59,70,.10), transparent 70%);}
+  .breach{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;color:var(--red);display:flex;align-items:center;gap:8px;margin-bottom:12px;}
+  .breach .dot{width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 10px var(--red);}
+  .title{font-size:32px;font-weight:800;letter-spacing:.02em;line-height:1;margin:0;color:#fff;text-wrap:balance;}
+  .title .glitch{position:relative;color:var(--red);}
+  .title .glitch::before,.title .glitch::after{content:"BLACKLIST";position:absolute;left:0;top:0;}
+  .title .glitch::before{color:var(--cyan);transform:translate(-1.5px,-1px);opacity:.6;clip-path:inset(0 0 55% 0);}
+  .title .glitch::after{color:var(--amber);transform:translate(1.5px,1px);opacity:.5;clip-path:inset(55% 0 0 0);}
+  .sub{font-family:var(--mono);font-size:11px;color:var(--fg-faint);margin-top:6px;letter-spacing:.04em;}
+
+  .meta{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;}
+  .meta > div{background:var(--panel-2);padding:9px 12px;}
+  .meta .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:var(--fg-faint);text-transform:uppercase;}
+  .meta .v{font-size:14px;font-weight:700;margin-top:3px;}
+  .meta .v.target{color:#fff;}
+  .meta .v.hacker{color:var(--cyan);}
+  .meta .full{grid-column:1 / -1;}
+  .meta .v.total{color:var(--amber);font-family:var(--mono);font-size:16px;letter-spacing:.02em;}
+
+  /* 김연정 침투자 메모 */
+  .kyintro{margin-top:14px;border:1px solid rgba(73,199,216,.35);border-radius:10px;background:linear-gradient(180deg,rgba(73,199,216,.08),rgba(73,199,216,.02));padding:12px 14px;}
+  .kytag{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:#071316;background:var(--cyan);padding:2px 8px;border-radius:100px;font-weight:700;}
+  .kyintro p{margin:9px 0 0;font-size:13px;line-height:1.6;color:#bfeef5;font-style:italic;}
+
+  .listcap{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--fg-faint);padding:12px 18px 2px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;}
+
+  .list{padding:8px 12px 16px;display:flex;flex-direction:column;gap:10px;}
+  .card{background:var(--panel);border:1px solid var(--line);border-left:2px solid var(--red-deep);border-radius:10px;padding:13px 14px 14px;}
+  .row1{display:flex;align-items:flex-start;gap:10px;}
+  .idx{font-family:var(--mono);font-size:11px;color:var(--fg-faint);padding-top:2px;min-width:24px;}
+  .cardhead{flex:1;min-width:0;}
+  .cardtitle{font-size:15px;font-weight:700;color:#fff;line-height:1.32;}
+  .amt{font-family:var(--mono);font-weight:700;font-size:13px;color:var(--amber);white-space:nowrap;padding-top:1px;}
+  .tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px;}
+  .tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;color:#ffd7da;background:rgba(255,59,70,.10);border:1px solid rgba(255,59,70,.30);padding:2px 7px;border-radius:100px;}
+  .body{font-size:12.5px;line-height:1.62;color:var(--fg-dim);margin-top:10px;padding-top:10px;border-top:1px solid var(--line);}
+  .risk{display:flex;gap:7px;margin-top:9px;font-size:11.5px;line-height:1.5;color:#f0c9a0;}
+  .risk b{color:var(--amber);font-family:var(--mono);font-size:10px;letter-spacing:.1em;flex-shrink:0;}
+  /* 김연정 코멘트 */
+  .kynote{display:flex;gap:8px;margin-top:10px;padding:9px 10px;border-radius:8px;background:rgba(73,199,216,.07);border:1px solid rgba(73,199,216,.22);font-size:12px;line-height:1.55;color:#cdeef4;}
+  .kynote .who{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--cyan);flex-shrink:0;font-weight:700;padding-top:1px;}
+  .kynote i{font-style:italic;}
+
+  /* QR / share */
+  .share{border-top:1px solid var(--line);padding:20px 18px 8px;text-align:center;}
+  .share h2{margin:0 0 3px;font-size:13px;letter-spacing:.02em;color:#fff;}
+  .share .cap{font-family:var(--mono);font-size:10px;color:var(--fg-faint);letter-spacing:.06em;margin-bottom:14px;}
+  .qrwrap{display:inline-flex;padding:12px;background:#fff;border-radius:14px;box-shadow:0 0 0 1px var(--line-2),0 12px 30px -12px rgba(0,0,0,.8);}
+  .qrwrap canvas{display:block;width:190px;height:190px;image-rendering:pixelated;}
+  .qrurl{margin-top:12px;font-family:var(--mono);font-size:10.5px;color:var(--cyan);word-break:break-all;letter-spacing:.01em;}
+  .qrnote{margin-top:6px;font-family:var(--mono);font-size:9px;color:var(--fg-faint);letter-spacing:.08em;}
+
+  .foot{text-align:center;padding:18px 18px 22px;}
+  .stamp{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--red);border:1.5px solid var(--red);padding:8px 16px;border-radius:6px;transform:rotate(-3deg);box-shadow:0 0 20px -6px var(--red);}
+  .footnote{margin-top:14px;font-family:var(--mono);font-size:9.5px;line-height:1.7;color:var(--fg-faint);letter-spacing:.02em;}
+
+  .disclaimer{max-width:430px;width:100%;margin-top:18px;font-family:var(--mono);font-size:10px;line-height:1.7;color:var(--fg-faint);text-align:center;letter-spacing:.03em;border:1px dashed var(--line-2);border-radius:8px;padding:11px 14px;}
+
+  /* ---- 모바일: 폰 베젤 제거하고 화면을 꽉 채움 ---- */
+  @media (max-width:520px){
+    body{padding:12px 8px calc(40px + env(safe-area-inset-bottom));}
+    .tape,.disclaimer{max-width:100%;}
+    .phone{max-width:100%;padding:0;border:none;border-radius:0;background:none;box-shadow:none;}
+    .screen{border-radius:18px;}
+    .title{font-size:clamp(30px,10vw,38px);}
+    .body{font-size:13px;}
+    .cardtitle{font-size:15.5px;}
+    .kynote,.kyintro p{font-size:12.5px;}
+    .qrwrap canvas{width:210px;height:210px;}
+  }
+  @media (prefers-reduced-motion:reduce){.blink{animation:none;}}
+</style>
+</head>
+<body>
+
+<div class="tape"><span>⚠ CONFIDENTIAL · 무단 접근됨 · DATA BREACH · 표정원 · 무단 접근됨 · CONFIDENTIAL ⚠</span></div>
+
+<div class="phone">
+  <div class="screen">
+
+    <div class="status">
+      <span>04:17 · <span class="locked">◉ REMOTE ACCESS</span></span>
+      <span>암호화 우회됨 · <span class="blink">100%</span> ▮▮▮▮</span>
+    </div>
+
+    <header class="hdr">
+      <div class="breach"><span class="dot"></span> UNAUTHORIZED EXTRACTION · SECURE NOTES 유출</div>
+      <h1 class="title"><span class="glitch">BLACKLIST</span></h1>
+      <div class="sub">/private/ledger/ — 표정원 의원 개인 보안 메모</div>
+
+      <div class="meta">
+        <div><div class="k">Target · 표적</div><div class="v target">표정원</div></div>
+        <div><div class="k">Extracted by · 침투</div><div class="v hacker">김연정</div></div>
+        <div class="full"><div class="k">노출 항목 · Exposed</div><div class="v">13건 · 자백성 장부 / 자금 흐름</div></div>
+        <div class="full"><div class="k">추적된 자금 총계 · Traced</div><div class="v total">₩ 8,760,000,000 +</div></div>
+      </div>
+
+      <div class="kyintro">
+        <span class="kytag">김연정 // 침투자 메모</span>
+        <p>"당신 폰, 지문 잠금 하나 믿고 이런 걸 넣어뒀네. 지웠어야지. 이 장부, 이미 세 곳에 복사해뒀어. 하나씩 열어줄게 — 표정원 씨."</p>
+      </div>
+    </header>
+
+    <div class="listcap"><span>DECRYPTED ENTRIES</span><span>모든 물증 → 표정원 단일 지목</span></div>
+
+    <main class="list" id="list"></main>
+
+    <section class="share">
+      <h2>원본 유출본 · 상시 링크</h2>
+      <div class="cap">SCAN TO OPEN — 주소 변경 없음(FIXED)</div>
+      <div class="qrwrap"><canvas id="qr"></canvas></div>
+      <div class="qrurl" id="qrurl"></div>
+      <div class="qrnote">GitHub Pages 고정 호스팅 · 외부 QR 서비스 미사용</div>
+    </section>
+
+    <footer class="foot">
+      <div class="stamp">EVIDENCE // 김연정 확보</div>
+      <div class="footnote">
+        SHA-256 무결성 확인됨 · 원본 단말 미인지 · 사본 3부 분산 보관<br>
+        "빠져나갈 구멍이 내 쪽에만 없다." — 표정원 메모 中
+      </div>
+    </footer>
+
+  </div>
+</div>
+
+<div class="disclaimer">
+  ⚠ 본 화면은 실존 인물·사건과 무관한 창작(픽션) 시나리오용 소품입니다. 실제 해킹·명예훼손 목적이 아닙니다.
+</div>
+
+<script>
+  const SRC_URL = "https://jacktaz8902-eng.github.io/pyowl-blacklist/";
+
+  /* =========================================================
+     엔트리 데이터 (자백 본문 + 김연정 코멘트)
+     ========================================================= */
+  const entries = [
+    { title:"여러분당 대표 50억 전달", amt:"50억", tags:["불법 정치자금","횡령 주동"],
+      body:"대표 측에서 흔적을 지우려 전액 현금으로 요구함. 내 차명 계좌에서 50억 인출 기록은 남았는데, 전달 증빙·영수증이 전혀 없다. 꼬리가 밟히면 대표는 무조건 발뺌하고, 나 혼자 다 뒤집어쓴다. 미친 짓이었다.",
+      risk:"현금 특성상 전달 증빙 0. 인출 기록만 잔존.",
+      ky:"현금 50억을 영수증도 없이 넘겼다고? 대표는 이미 당신 버릴 준비 끝냈어. 순번 1번은 늘 이런 사람이지." },
+    { title:"광명정신의료원 명원장 2.5억 세탁", amt:"2.5억", tags:["살인방조","자금세탁"],
+      body:"장기적출 관련 더러운 돈을 세탁해 준 대가로 2.5억을 받음. 하필 내 실명 연결 법인으로 다이렉트 입금. 경찰이 계좌 까는 순간 1순위 타겟은 무조건 나.",
+      risk:"실명 법인 직접 수취. 세탁 시도 자체가 물증.",
+      ky:"실명 법인으로 받은 돈을 '세탁'이라 부르는 거, 그건 세탁이 아니라 자수야." },
+    { title:"안의사 도피 자금", amt:"3천만", tags:["범인 도피","해외 도피"],
+      body:"중국 SHH로 도피시킨 안의사 체재비 3천만 원이 내 비서실장 계좌를 거쳐 갔다. 꼬리 자르기를 완벽히 했다 여겼는데, 장부를 다시 볼수록 구멍이 내 쪽에만 없다.",
+      risk:"비서실장 계좌 = 나와 직결. 경유 흔적 잔존.",
+      ky:"비서실장 통장을 거쳤으면 그건 꼬리 자르기가 아니라 나한테 그어놓은 화살표야." },
+    { title:"경찰청 정보국장 스폰서 비용", amt:"1억 +", tags:["뇌물 공여","수사 무마"],
+      body:"정기 상납한 골프 접대비와 현금 1억. 수사 무마용이지만 돈 출처는 내 차명계좌뿐, 정보국장은 철저히 현금만 받았다. 걸리면 저놈은 빠지고 나만 구속.",
+      risk:"수취인 현금만 수령 → 공여자만 특정됨.",
+      ky:"그쪽은 현금, 당신은 계좌 기록. 누가 감방 가는지는 초등학생도 맞히겠는데." },
+    { title:"차강혁 미행 및 흥신소 의뢰비", amt:"5천만", tags:["당비 횡령","불법 미행"],
+      body:"김실장에게 지급한 5천만 원. 당 선거 자금에서 빼돌려 썼다. 회계 감사 들어오면 횡령으로 빼도 박도 못하게 내 목을 죈다.",
+      risk:"선거 자금 유용. 감사 시 즉시 노출.",
+      ky:"차강혁 뒤를 캐라고 준 돈이 결국 당신 목을 캐게 됐네. 감사 한 번이면 끝이야." },
+    { title:"K일보 전기자 입막음 현금", amt:"월 1천만", tags:["언론 매수","엠바고 대가"],
+      body:"엠바고를 대가로 매달 꽂아준 1천만 원. 이 새끼가 요즘 더 큰 액수를 요구한다. 통화 녹음이라도 까발려지면 언론 매수 혐의까지 추가.",
+      risk:"수취인 변심·통화 녹음 존재 가능.",
+      ky:"기자가 갑자기 액수를 올린다? 이미 당신 통화 녹음을 손에 쥐고 있다는 뜻이야. 나만 판 게 아니었어." },
+    { title:"곡성 곽원장 비밀 연구소 지원금", amt:"10억", tags:["예산 전용","불법 인체실험"],
+      body:"국회 보건복지위 예산을 우회해 곽원장의 불법 백신 연구소로 흘려보낸 10억. 꼬리가 밟히면 의원직 박탈은 물론 반인륜 범죄로 묶인다.",
+      risk:"국가 예산 우회. 반인륜 범죄 연루.",
+      ky:"국가 예산 10억을 인체실험실로. 이건 뇌물 항목이 아니라 인생 종료 버튼이야." },
+    { title:"윤세린(아내) 언론 통제용 비자금", amt:"3억", tags:["개인 채무 은폐","무마 자금"],
+      body:"그 여자가 자해소동 벌일 때마다 병원장과 찌라시 기자들 입 막으려 쓴 돈이 도합 3억. 전부 내 개인 채무로 잡혀 있다.",
+      risk:"전액 개인 채무로 귀속. 회수 불가.",
+      ky:"아내 입까지 3억으로 막아야 했다면, 집 안 단속부터 실패한 거야. 그 여자는 값이 더 오를 텐데." },
+    { title:"명원장 장기적출 'VIP' 명단 관리비", amt:"4억", tags:["장기매매 알선","브로커"],
+      body:"VIP들에게 뒷돈을 받고 명원장과 연결해 준 알선 수수료 4억. VIP는 전원 차명·현금 거래라 증거가 없고, 브로커인 내 통장 기록만 더럽게 남았다.",
+      risk:"알선 구조상 브로커 계좌만 노출.",
+      ky:"VIP는 전부 현금, 브로커 통장만 깨끗이 남았고. 이 구조에서 총알받이가 누군지 아직도 몰라?" },
+    { title:"중국 SHH 조직 연계 자금", amt:"2억", tags:["외환관리법","범죄단체"],
+      body:"안의사를 빼돌리느라 SHH에 환치기로 보낸 2억. 이 루트를 파헤치면 단순 뇌물이 아니라 범죄단체 조직·외환관리법 위반까지 걸린다.",
+      risk:"환치기 루트 추적 시 죄질 급상승.",
+      ky:"환치기 루트 하나에 죄목이 세 개씩 딸려와. SHH는 당신을 조직원으로 볼 텐데." },
+    { title:"종로구 재개발 조합장 매수", amt:"2억", tags:["선거법 위반","공천 대가"],
+      body:"공천을 앞두고 지역구 관리 차원에서 조합장에게 건넨 2억. 차명도 아니고 내 지역구 사무실 계좌에서 나갔다. 선거법 위반의 스모킹 건.",
+      risk:"사무실 계좌 직접 출금 = 결정적 증거.",
+      ky:"지역구 사무실 계좌에서 곧장 2억? 스모킹 건 정도가 아니라 자필 자백서 수준이야." },
+    { title:"가짜 혼인신고서 위조 브로커 비용", amt:"3천만", tags:["공문서위조 교사"],
+      body:"김연정을 내 호적에 묶어두려 구청 직원을 매수하고 브로커에게 쓴 3천만 원. 공문서위조 교사 혐의.",
+      risk:"위조 주체가 곧 유출자(김연정)와 연결됨.",
+      ky:"나를 당신 호적에 묶으려고 3천을 썼다고. …이 항목은 좀 다르게 받아들일게. 당신이 왜 지금 이 꼴인지, 여기서 시작됐어." },
+    { title:"백신 임상시험 은폐용 연구진 매수", amt:"금액 미상", tags:["살인 은폐 방조"],
+      body:"부작용으로 사망한 피실험자들을 무연고자로 둔갑시켜 화장 처리하는 데 쓴 뒷돈. 살인 은폐 방조죄. 이 모든 미친 짓의 물증이 나 하나만을 가리킨다.",
+      risk:"인명 은폐 정황. 죄질 최상.",
+      ky:"사람을 무연고자로 만들어 태웠어. 여기서부턴 돈 문제가 아니야. 그래서 이 파일을 지우지 않고 남겨두는 거야." },
+  ];
+
+  const list = document.getElementById("list");
+  entries.forEach((e,i)=>{
+    const n = String(i+1).padStart(2,"0");
+    const tags = e.tags.map(t=>`<span class="tag">${t}</span>`).join("");
+    list.insertAdjacentHTML("beforeend", `
+      <article class="card">
+        <div class="row1">
+          <div class="idx">${n}</div>
+          <div class="cardhead">
+            <div class="cardtitle">${e.title}</div>
+            <div class="tags">${tags}</div>
+          </div>
+          <div class="amt">${e.amt}</div>
+        </div>
+        <div class="body">${e.body}</div>
+        <div class="risk"><b>RISK</b><span>${e.risk}</span></div>
+        <div class="kynote"><span class="who">김연정 ▸</span><i>${e.ky}</i></div>
+      </article>
+    `);
+  });
+
+  /* =========================================================
+     자체 QR 인코더 (byte mode · EC level L · ver 1~5 · 단일 블록)
+     외부 라이브러리/네트워크 없음. 링크는 SRC_URL 고정.
+     ========================================================= */
+  (function(){
+    const EXP=new Array(512), LOG=new Array(256);
+    (function(){let x=1;for(let i=0;i<255;i++){EXP[i]=x;LOG[x]=i;x<<=1;if(x&0x100)x^=0x11d;}for(let i=255;i<512;i++)EXP[i]=EXP[i-255];})();
+    const gmul=(a,b)=>(a===0||b===0)?0:EXP[LOG[a]+LOG[b]];
+    const DATACW=[0,19,34,55,80,108], ECCW=[0,7,10,15,20,26], ALIGN=[0,0,18,22,26,30];
+    const getBit=(x,i)=>((x>>>i)&1);
+
+    function rsGen(ec){let g=[1];for(let i=0;i<ec;i++){let ng=new Array(g.length+1).fill(0);for(let j=0;j<g.length;j++){ng[j]^=g[j];ng[j+1]^=gmul(g[j],EXP[i]);}g=ng;}return g;}
+    function rsEnc(data,ec){const gen=rsGen(ec);const res=data.concat(new Array(ec).fill(0));for(let i=0;i<data.length;i++){const c=res[i];if(c)for(let j=0;j<gen.length;j++)res[i+j]^=gmul(gen[j],c);}return res.slice(data.length);}
+
+    function encode(text){
+      const bytes=[];
+      for(const ch of unescape(encodeURIComponent(text))) bytes.push(ch.charCodeAt(0));
+      let v=1; while(v<5 && bytes.length>DATACW[v]-2) v++;
+      const dcw=DATACW[v], ecw=ECCW[v];
+      const bits=[];
+      const push=(val,len)=>{for(let i=len-1;i>=0;i--)bits.push((val>>i)&1);};
+      push(0b0100,4); push(bytes.length,8);
+      for(const b of bytes) push(b,8);
+      const cap=dcw*8;
+      for(let i=0;i<4 && bits.length<cap;i++) bits.push(0);
+      while(bits.length%8!==0) bits.push(0);
+      const pad=[0xEC,0x11]; let pi=0;
+      while(bits.length<cap){ push(pad[pi&1],8); pi++; }
+      const data=[]; for(let i=0;i<bits.length;i+=8){let b=0;for(let j=0;j<8;j++)b=(b<<1)|bits[i+j];data.push(b);}
+      const ec=rsEnc(data,ecw);
+      return {ver:v, cw:data.concat(ec)};
+    }
+
+    function fmtBits(mask){let data=(1<<3)|mask; let rem=data; for(let i=0;i<10;i++)rem=(rem<<1)^(((rem>>>9)&1)*0x537); return ((data<<10)|rem)^0x5412;}
+    function mfn(mask,x,y){switch(mask){
+      case 0:return (x+y)%2===0; case 1:return y%2===0; case 2:return x%3===0; case 3:return (x+y)%3===0;
+      case 4:return (Math.floor(x/3)+Math.floor(y/2))%2===0; case 5:return ((x*y)%2+(x*y)%3)===0;
+      case 6:return (((x*y)%2+(x*y)%3)%2)===0; case 7:return (((x+y)%2+(x*y)%3)%2)===0;}}
+
+    function build(text){
+      const {ver,cw}=encode(text);
+      const size=17+ver*4;
+      const m=Array.from({length:size},()=>new Array(size).fill(0));
+      const fn=Array.from({length:size},()=>new Array(size).fill(false));
+      const set=(r,c,val)=>{m[r][c]=val;fn[r][c]=true;};
+
+      function finder(r,c){for(let dr=-1;dr<=7;dr++)for(let dc=-1;dc<=7;dc++){const rr=r+dr,cc=c+dc;if(rr<0||rr>=size||cc<0||cc>=size)continue;const ring=Math.max(Math.abs(dr-3),Math.abs(dc-3));const on=(dr>=0&&dr<=6&&dc>=0&&dc<=6)&&(ring!==2);set(rr,cc,on?1:0);}}
+      finder(0,0);finder(0,size-7);finder(size-7,0);
+
+      for(let i=8;i<size-8;i++){ if(!fn[6][i])set(6,i,i%2===0?1:0); if(!fn[i][6])set(i,6,i%2===0?1:0); }
+
+      if(ver>=2){const a=ALIGN[ver];for(let dr=-2;dr<=2;dr++)for(let dc=-2;dc<=2;dc++){const ring=Math.max(Math.abs(dr),Math.abs(dc));set(a+dr,a+dc,(ring!==1)?1:0);}}
+
+      set(size-8,8,1);
+
+      // 포맷 정보 영역 좌표(순서=비트 인덱스 0..14)
+      const c1=[]; for(let i=0;i<=5;i++)c1.push([8,i]); c1.push([8,7]);c1.push([8,8]);c1.push([7,8]); for(let i=9;i<15;i++)c1.push([14-i,8]);
+      const c2=[]; for(let i=0;i<8;i++)c2.push([size-1-i,8]); for(let i=8;i<15;i++)c2.push([8,size-15+i]);
+      c1.concat(c2).forEach(([r,c])=>{fn[r][c]=true;});
+
+      // 데이터 배치 (지그재그)
+      let bi=0; const dl=cw.length*8;
+      for(let right=size-1;right>=1;right-=2){
+        if(right===6)right=5;
+        for(let vert=0;vert<size;vert++){
+          for(let j=0;j<2;j++){
+            const x=right-j; const up=((right+1)&2)===0; const y=up?(size-1-vert):vert;
+            if(!fn[y][x]){ let dark=0; if(bi<dl){dark=getBit(cw[bi>>3],7-(bi&7));bi++;} m[y][x]=dark; }
+          }
+        }
+      }
+
+      // 마스크 후보 평가 → 최소 페널티 선택
+      function penalty(mm){
+        const n=size; let p=0;
+        for(let r=0;r<n;r++){let run=1;for(let c=1;c<n;c++){if(mm[r][c]===mm[r][c-1]){run++;if(run===5)p+=3;else if(run>5)p++;}else run=1;}}
+        for(let c=0;c<n;c++){let run=1;for(let r=1;r<n;r++){if(mm[r][c]===mm[r-1][c]){run++;if(run===5)p+=3;else if(run>5)p++;}else run=1;}}
+        for(let r=0;r<n-1;r++)for(let c=0;c<n-1;c++){const v=mm[r][c];if(v===mm[r][c+1]&&v===mm[r+1][c]&&v===mm[r+1][c+1])p+=3;}
+        const p1=[1,0,1,1,1,0,1,0,0,0,0], p2=[0,0,0,0,1,0,1,1,1,0,1];
+        const mt=(get,i)=>{for(let k=0;k<11;k++){if(get(i+k)!==p1[k])break; if(k===10)return true;} for(let k=0;k<11;k++){if(get(i+k)!==p2[k])return false;} return true;};
+        for(let r=0;r<n;r++)for(let c=0;c<=n-11;c++){if(mt(x=>mm[r][x],c))p+=40;}
+        for(let c=0;c<n;c++)for(let r=0;r<=n-11;r++){if(mt(x=>mm[x][c],r))p+=40;}
+        let dark=0;for(let r=0;r<n;r++)for(let c=0;c<n;c++)if(mm[r][c])dark++;
+        p+=Math.floor(Math.abs(dark/(n*n)*100-50)/5)*10;
+        return p;
+      }
+
+      let best=null,bestMask=0,bestP=Infinity;
+      for(let mask=0;mask<8;mask++){
+        const mm=m.map(row=>row.slice());
+        for(let r=0;r<size;r++)for(let c=0;c<size;c++){ if(!fn[r][c] && mfn(mask,c,r)) mm[r][c]^=1; }
+        const fb=fmtBits(mask);
+        for(let i=0;i<15;i++){const b=getBit(fb,i); mm[c1[i][0]][c1[i][1]]=b; mm[c2[i][0]][c2[i][1]]=b;}
+        const p=penalty(mm);
+        if(p<bestP){bestP=p;best=mm;bestMask=mask;}
+      }
+      return best;
+    }
+
+    function render(){
+      const mat=build(SRC_URL);
+      const n=mat.length, q=4, scale=6, dim=(n+q*2)*scale;
+      const cv=document.getElementById("qr");
+      cv.width=dim;cv.height=dim;
+      const ctx=cv.getContext("2d");
+      ctx.fillStyle="#ffffff";ctx.fillRect(0,0,dim,dim);
+      ctx.fillStyle="#07090c";
+      for(let r=0;r<n;r++)for(let c=0;c<n;c++)if(mat[r][c])ctx.fillRect((c+q)*scale,(r+q)*scale,scale,scale);
+      document.getElementById("qrurl").textContent=SRC_URL;
+    }
+    render();
+    window.__qrReady=true;
+  })();
+</script>
+</body>
+</html>
